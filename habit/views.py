@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from habit.models import Habit
+from habit.paginators import HabitPaginator
 from habit.serializers import HabitSerializer
 
 
@@ -18,6 +19,7 @@ class HabitListAPIView(generics.ListAPIView):
     """Эндпоинт просмотра всех привычек"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    pagination_class = HabitPaginator
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
