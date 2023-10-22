@@ -8,7 +8,7 @@ NULLABLE = {'blank': True, 'null': True}
 class Habit(models.Model):
     """Модель привычки"""
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User', **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User', **NULLABLE)
 
     place = models.CharField(max_length=200, verbose_name='Location', **NULLABLE)
     time = models.TimeField(verbose_name='Time of start')
