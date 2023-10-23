@@ -5,7 +5,7 @@ from users.serializers import UserSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
-    """Эндпоинт создания юзера"""
+    """Эндпоинт создания(регистрация) юзера"""
     serializer_class = UserSerializer
 
 
