@@ -9,7 +9,7 @@ def choose_connected_habit_or_reward(connected_habit, reward):
 
 def check_duration_of_action(duration):
     """Проверка на выполнение привычки(должно быть не более 120 секунд)"""
-    if duration.total_seconds() > 120:
+    if duration > 120:
         raise ValidationError('Время выполнения привычки не должно быть более 120 секунд(2 минут)!')
 
 

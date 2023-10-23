@@ -14,7 +14,7 @@ class Habit(models.Model):
     time = models.TimeField(verbose_name='Время начала')
     action = models.TextField(verbose_name='Действие')
     period = models.IntegerField(default=1, verbose_name='Периодичность привычки')
-    duration_of_action = models.DurationField(verbose_name='Длительность привычки в секундах')
+    duration_of_action = models.IntegerField(verbose_name='Длительность привычки в секундах')
 
     is_pleasant = models.BooleanField(default=False, verbose_name='Признак приятной привычки')
     connected_habit = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Связанная привычка',

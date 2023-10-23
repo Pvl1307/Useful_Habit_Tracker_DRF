@@ -25,7 +25,7 @@ class HabitListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        return Habit.objects.filter(owner=self.request.user)
+        return Habit.objects.filter(owner=self.request.user).order_by('id')
 
 
 class PublicHabitListAPIView(generics.ListAPIView):

@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('time', models.TimeField(verbose_name='Время начала')),
                 ('action', models.TextField(verbose_name='Действие')),
                 ('period', models.IntegerField(default=1, verbose_name='Периодичность привычки')),
-                ('duration_of_action', models.DurationField(verbose_name='Длительность привычки в секундах')),
+                ('duration_of_action', models.IntegerField(verbose_name='Длительность привычки в секундах')),
                 ('is_pleasant', models.BooleanField(default=False, verbose_name='Признак приятной привычки')),
                 ('reward', models.TextField(blank=True, null=True, verbose_name='Вознаграждение за выполнение действия')),
                 ('is_public', models.BooleanField(default=False, verbose_name='Признак публичности привычки')),

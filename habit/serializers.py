@@ -8,7 +8,7 @@ from habit.validators import check_habit_frequency, check_duration_of_action, ch
 class HabitSerializer(serializers.ModelSerializer):
     """Сериализатор привычки"""
     period = serializers.IntegerField(validators=[check_habit_frequency])
-    duration_of_action = serializers.DurationField(validators=[check_duration_of_action])
+    duration_of_action = serializers.IntegerField(validators=[check_duration_of_action])
 
     class Meta:
         model = Habit
