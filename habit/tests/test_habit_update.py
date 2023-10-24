@@ -10,7 +10,8 @@ class HabitUpdateTestCase(APITestCase):
     def setUp(self) -> None:
         self.user = User.objects.create(
             username='test',
-            password='test'
+            password='test',
+            chat_id='12341234'
         )
         self.habit = Habit.objects.create(
             owner=self.user,
@@ -42,7 +43,8 @@ class HabitUpdateTestCase(APITestCase):
     def test_habit_update_with_wrong_owner(self):
         user = User.objects.create(
             username='not_owner',
-            password='not_owner'
+            password='not_owner',
+            chat_id='909234'
         )
         self.client.force_authenticate(user=user)
 

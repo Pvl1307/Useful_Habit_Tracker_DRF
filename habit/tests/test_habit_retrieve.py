@@ -10,7 +10,8 @@ class HabitRetrieveTestCase(APITestCase):
     def setUp(self) -> None:
         self.user = User.objects.create(
             username='test',
-            password='test'
+            password='test',
+            chat_id='12341234'
         )
         self.habit = Habit.objects.create(
             owner=self.user,
@@ -37,7 +38,8 @@ class HabitRetrieveTestCase(APITestCase):
         """Тест на проверку получения объекта чужим пользователем"""
         user = User.objects.create(
             username='not_owner',
-            password='not_owner'
+            password='not_owner',
+            chat_id='1239894'
         )
         self.client.force_authenticate(user=user)
 

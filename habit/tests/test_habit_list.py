@@ -10,7 +10,8 @@ class HabitListTestCase(APITestCase):
     def setUp(self) -> None:
         self.user = User.objects.create(
             username='test',
-            password='test'
+            password='test',
+            chat_id='12341234'
         )
         self.habit = Habit.objects.create(
             owner=self.user,

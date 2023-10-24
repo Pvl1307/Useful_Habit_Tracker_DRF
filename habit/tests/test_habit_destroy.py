@@ -10,7 +10,8 @@ class HabitDestroyTestCase(APITestCase):
     def setUp(self) -> None:
         self.user = User.objects.create(
             username='test',
-            password='test'
+            password='test',
+            chat_id='12341234'
         )
         self.habit = Habit.objects.create(
             owner=self.user,
@@ -26,7 +27,8 @@ class HabitDestroyTestCase(APITestCase):
         """Тест на проверку удаления объекта чужим пользователем"""
         user = User.objects.create(
             username='not_owner',
-            password='not_owner'
+            password='not_owner',
+            chat_id='123412355'
         )
         self.client.force_authenticate(user=user)
 
