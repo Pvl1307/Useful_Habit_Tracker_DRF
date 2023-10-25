@@ -8,7 +8,7 @@ from habit.serializers import HabitSerializer
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
-    """Эндпоинт создания привычки"""
+    """Эндпоинт создания привычки (Поле 'time' писать по timezone='UTC')"""
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
