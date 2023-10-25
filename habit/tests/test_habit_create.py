@@ -173,3 +173,32 @@ class HabitCreateTestCase(APITestCase):
                              ]
                          }
                          )
+
+    def test_validator_check_habit_frequency_second_part(self):
+        """Тест второй части валидатора check_habit_frequency """
+        self.client.force_authenticate(user=self.user)
+
+        data = {
+            "place": "Denamrk",
+            "time": "12:00",
+            "action": "anjumaniya",
+            "period": 0,
+            "duration_of_action": 120,
+            "is_pleasant": True,
+            "is_public": False
+        }
+
+        response = self.client.post(
+            reverse('habit:habit_create'),
+            data=data
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        self.assertEqual(response.json(),
+                         {
+                             "period": [
+                                 "Периодичность привычки не может равняться нулю!"
+                             ]
+                         }
+                         )
