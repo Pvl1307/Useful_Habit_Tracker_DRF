@@ -30,6 +30,9 @@ def validate_no_reward_or_connected_habit_for_pleasant(data):
 
 
 def check_habit_frequency(period):
-    """Проверка периодичности привычки(не реже, чем 1 раз в 7 дней)"""
+    """Проверка периодичности привычки(не реже, чем 1 раз в 7 дней) или периодичность не может равняться нулю"""
     if period > 7:
         raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в неделю!')
+
+    if period == 0:
+        raise ValidationError('Периодичность привычки не может равняться нулю!')
