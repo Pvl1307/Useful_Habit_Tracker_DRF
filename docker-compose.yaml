@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  redis:
+    image: redis:latest
+    restart: always
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  db:
+    image: postgres
+    restart: always
+
+    env_file:
+      - .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $POSTGRES_USER']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  web:
+    image: web
+    tty: true
+    build: .
+    command: sh -c 'python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - .:/code
+    ports:
+      - '8000:8000'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  celery:
+    build: .
+    tty: true
+    command: celery -A config worker -l INFO
+    depends_on:
+      - redis
+      - web
+    healthcheck:
+      test: ['CMD', 'celery', 'inspect', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  celery_beat:
+    build: .
+    tty: true
+    command: celery -A config beat -l INFO -S django
+    depends_on:
+      - db
+      - web
+      - celery
+
+volumes:
+  pg_data:
